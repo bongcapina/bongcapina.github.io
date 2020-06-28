@@ -1,1 +1,160 @@
-Hello!
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<title>Hype.Ph</title>
+	<meta name="author" content="" />
+	<meta name="description" content="" />
+	<meta name="keywords"  content="" />
+	<meta name="Resource-type" content="Document" />
+
+	<link rel="shortcut icon" href="favicon.png">
+
+
+  <style>
+
+ 
+a, img {
+    border:none;
+    outline:none
+}
+  html {
+    height: 100%;
+    font-size: 62.5%; /* 10px with default settings */
+  }   
+  body {    
+    margin: 0;
+    height: 100%;
+    width: 100%; /* width needed for Firefox */
+    background-color:#fff;
+
+    /* old flexbox - Webkit and Firefox. For backwards compatibility */
+    display: -webkit-box; display: -moz-box;
+    /* middle-aged flexbox. Needed for IE 10 */
+    display: -ms-flexbox;
+    /* new flexbox. Chrome (prefix), Opera, upcoming browsers without */
+    display: -webkit-flex;
+    display: flex;
+    
+    /* old flexbox: box-* */
+    -webkit-box-align: center; -moz-box-align: center;
+    /* middle flexbox: flex-* */
+    -ms-flex-align: center;
+    /* new flexbox: various property names */
+    -webkit-align-items: center;
+    align-items: center;
+    
+    
+    -webkit-box-pack: center; -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    
+    background-size: auto 100%;
+  }
+      
+
+  h1 {
+    display: -webkit-box; display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    
+    -webkit-box-align: center; -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    
+    -webkit-box-pack: center; -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-align-items: center;
+    align-items: center;
+    
+    height: 10rem;
+    padding: 0 3rem;
+    
+    background-color: hsla(0, 100%, 0%, .9);
+    color: white;
+
+    font-family: helvetica, sans-serif;
+    font-size: 5rem; /* font shorthand doesn’t work with rem in IE10 */
+    text-transform: uppercase;
+    text-shadow: 0 0 1.2rem hsla(0, 100%, 100%, .4);
+
+    box-shadow: 0 0 1.5rem hsla(0, 100%, 0%, .4);
+    border-radius: .5rem;
+  }
+
+
+
+  .childbox {
+      display: inline-block;
+      vertical-align: middle;  
+      padding: 20px;
+      overflow: hidden;
+      color: white;
+
+    font-family: helvetica, sans-serif;
+    font-size: 5rem; /* font shorthand doesn’t work with rem in IE10 */
+  }
+
+  .socialicons {
+		position: absolute;
+		width: 150px;
+		background: transparent;
+		text-align: left;
+		padding-left: 3%;
+		padding-top: 5%;
+		z-index: 999;
+	}
+
+  .facebook {
+    width:28px;
+    padding-right:15px;
+  }
+
+  .instagram {
+    width:28px;
+  }
+
+@media screen and (max-width: 768px){
+
+  .socialicons {
+    background: #333;
+    position: absolute;
+    width: 80px;
+    background: transparent;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    z-index: 999;
+  }
+
+  .facebook {
+    width:18px;
+    padding-right:6px;
+  }
+
+  .instagram {
+    width:18px;
+  }
+
+}
+
+
+  </style>
+
+
+
+
+
+</head>
+<body style="background-image:url(bg.jpg);background-size:cover;background-size:cover;">    
+
+<div class="childbox">
+  <a href="mailto:hello@hype.ph"><img src="logo.png" width="100%" border="0"></a>
+</div>
+
+</body>
+</html>
