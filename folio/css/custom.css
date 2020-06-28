@@ -1,0 +1,37 @@
+/* Add here all your CSS customizations */
+
+
+.stroke-1 {
+  stroke-linecap: butt;
+}
+
+.stroke-2 {
+  stroke-linecap: square;
+}
+
+.stroke-3 {
+  stroke-linecap: round;
+}
+
+/* DEMO STYLES */
+body {
+  background: #333;
+}
+
+.module {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+}
+
+line {
+  stroke: orange;
+  stroke-width: 20;
+}
+
+line {
+  stroke: orange;
+  stroke-width: 6;
+}
+
