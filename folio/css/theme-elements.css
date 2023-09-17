@@ -1705,7 +1705,7 @@ html body.body .btn:active {
 html body .btn-light,
 html body .btn-outline.btn-light {
 	border-color: #d9d9d9 #d9d9d9 #bfbfbf;
-	color: #777;
+	color: #000;
 }
 
 html body .btn-light:hover, html body .btn-light.hover,
@@ -1713,7 +1713,7 @@ html body .btn-outline.btn-light:hover,
 html body .btn-outline.btn-light.hover {
 	background-color: #f2f2f2;
 	border-color: #e6e6e6 #e6e6e6 #cccccc;
-	color: #777;
+	color: #000;
 }
 
 html body .btn-light:focus, html body .btn-light.focus,
@@ -3048,7 +3048,7 @@ html.ie9 .call-to-action.button-centered .container > .row > [class*="col-"], ht
 	font-size: 16px;
 	font-size: 1rem;
 	line-height: 1.5;
-	color: #777;
+	color: #000;
 }
 
 .countdown > span > span {
@@ -3854,14 +3854,14 @@ hr.pattern.pattern-2:after, .divider.pattern.pattern-2:after {
 	margin-bottom: 10px;
 	background: #FFF;
 	border: 1px solid #dfdfdf;
-	color: #777;
+	color: #000;
 	line-height: 73px;
 }
 
 /* Featured Boxes - Style 6 */
 .featured-boxes-style-6 .featured-box .icon-featured {
 	border: 1px solid #cecece;
-	color: #777;
+	color: #000;
 }
 
 .featured-boxes-style-6 .featured-box .icon-featured:after {
@@ -3882,7 +3882,7 @@ hr.pattern.pattern-2:after, .divider.pattern.pattern-2:after {
 /* Featured Boxes - Style 7 */
 .featured-boxes-style-7 .featured-box .icon-featured {
 	border: 1px solid #dfdfdf;
-	color: #777;
+	color: #000;
 }
 
 /* Featured Boxes - Style 8 */
@@ -3896,7 +3896,7 @@ hr.pattern.pattern-2:after, .divider.pattern.pattern-2:after {
 	background: #FFF;
 	line-height: 75px;
 	border: 0;
-	color: #777;
+	color: #000;
 }
 
 .featured-boxes-style-8 .featured-box .icon-featured:after {
@@ -5922,7 +5922,7 @@ label.error#captcha-error {
 h1, h2, h3, h4, h5, h6 {
 	color: #212529;
 	font-weight: 200;
-	letter-spacing: -.05em;
+	letter-spacing: auto;
 	margin: 0;
 	-webkit-font-smoothing: antialiased;
 }
@@ -7553,7 +7553,7 @@ html[xmlns] .clearfix {
 .sample-item .owl-carousel .owl-nav button.owl-next {
 	border: 0 none;
 	border-radius: 0 4px 4px 0;
-	color: #777;
+	color: #000;
 	height: 50px;
 	line-height: 38px;
 	margin-top: 0;
@@ -9316,7 +9316,7 @@ html.boxed .nav-secondary.sticky-active {
 
 .pricing-table .plan .plan-price .price-label {
 	text-transform: uppercase;
-	color: #777;
+	color: #000;
 	font-size: 11.2px;
 	font-size: 0.7rem;
 	line-height: 1;
@@ -9462,7 +9462,7 @@ html.boxed .nav-secondary.sticky-active {
 
 .pricing-block .plan-price .price-label {
 	text-transform: uppercase;
-	color: #777;
+	color: #000;
 	font-size: 11.2px;
 	font-size: 0.7rem;
 	line-height: 1;
@@ -10921,7 +10921,7 @@ html.boxed .slider-container {
 }
 /* Sort Source Style 3 */
 .sort-source.sort-source-style-3 > li > a {
-	color: #777;
+	color: #000;
 }
 
 .sort-source.sort-source-style-3 > li.active > a {
@@ -11587,7 +11587,7 @@ html.boxed .slider-container {
 }
 
 .tabs-navigation .nav-tabs > li .nav-link {
-	color: #777;
+	color: #000;
 	padding: 18px;
 	line-height: 100%;
 	position: relative;
@@ -11671,7 +11671,7 @@ html.boxed .slider-container {
 	border: 0;
 	border-bottom: 3px solid #eee;
 	border-radius: 0;
-	color: #777;
+	color: #000;
 	font-size: 16px;
 }
 
@@ -11874,7 +11874,7 @@ html.boxed .slider-container {
 }
 
 .testimonial.testimonial-style-2 blockquote p {
-	color: #777;
+	color: #000;
 }
 
 .testimonial.testimonial-style-2 .testimonial-arrow-down {
@@ -11911,18 +11911,18 @@ html.boxed .slider-container {
 .testimonial.testimonial-style-3 blockquote:before {
 	top: 5px;
 	left: 9px;
-	color: #777;
+	color: #000;
 	font-size: 35px;
 }
 
 .testimonial.testimonial-style-3 blockquote:after {
-	color: #777;
+	color: #000;
 	font-size: 35px;
 	bottom: -5px;
 }
 
 .testimonial.testimonial-style-3 blockquote p {
-	color: #777;
+	color: #000;
 	font-family: "Open Sans", Arial, sans-serif;
 	font-size: 1em;
 	font-style: normal;
@@ -11969,18 +11969,18 @@ html.boxed .slider-container {
 .testimonial.testimonial-style-4 blockquote:before {
 	top: 5px;
 	left: 9px;
-	color: #777;
+	color: #000;
 	font-size: 35px;
 }
 
 .testimonial.testimonial-style-4 blockquote:after {
-	color: #777;
+	color: #000;
 	font-size: 35px;
 	bottom: -5px;
 }
 
 .testimonial.testimonial-style-4 blockquote p {
-	color: #777;
+	color: #000;
 	font-family: "Open Sans", Arial, sans-serif;
 	font-size: 1em;
 	font-style: normal;
@@ -12027,7 +12027,7 @@ html.boxed .slider-container {
 }
 
 .testimonial.testimonial-style-5 blockquote p {
-	color: #777;
+	color: #000;
 	font-family: "Open Sans", Arial, sans-serif;
 	font-size: 1.2em;
 	font-style: normal;
@@ -12081,7 +12081,7 @@ html.boxed .slider-container {
 }
 
 .testimonial.testimonial-style-6 blockquote p {
-	color: #777;
+	color: #000;
 	font-size: 24px;
 	line-height: 30px;
 }
@@ -12173,7 +12173,7 @@ html.boxed .slider-container {
 }
 
 .testimonial.testimonial-with-quotes blockquote:before {
-	color: #777;
+	color: #000;
 	display: block !important;
 	left: 10px;
 	top: 0;
@@ -12185,7 +12185,7 @@ html.boxed .slider-container {
 }
 
 .testimonial.testimonial-with-quotes blockquote:after {
-	color: #777;
+	color: #000;
 	display: block !important;
 	right: 10px;
 	font-size: 80px;
@@ -12381,13 +12381,13 @@ html.boxed .slider-container {
 	transition: all 0.3s;
 	background: rgba(33, 37, 41, 0.8);
 	color: #FFF;
-	font-weight: 600;
+	font-weight: 1000;
 	left: 0;
-	letter-spacing: -.05em;
+	letter-spacing: auto;
 	position: absolute;
 	z-index: 2;
 	max-width: 90%;
-	font-size: 17px;
+	font-size: 22px;
 	padding: 13px 21px 2px;
 	bottom: 13%;
 }
@@ -12397,12 +12397,12 @@ html.boxed .slider-container {
 	border-radius: 2px;
 	display: inline-block;
 	float: left;
-	font-size: 0.6em;
-	font-weight: 600;
-	letter-spacing: 0;
+	font-size: 16px;
+	font-weight: 1400;
+	letter-spacing: auto;
 	margin: 8px -2px -15px 0px;
 	padding: 2px 12px;
-	text-transform: uppercase;
+	text-transform: auto;
 	z-index: 2;
 	line-height: 2.3;
 }
@@ -12579,7 +12579,7 @@ html.boxed .slider-container {
 	opacity: 0;
 	padding: 15px;
 	text-shadow: none;
-	color: #777;
+	color: #000;
 }
 
 .thumb-info.thumb-info-bottom-info .thumb-info-type {
@@ -13345,7 +13345,7 @@ section.timeline .timeline-box .owl-carousel {
 	border-radius: 0;
 	border: 0;
 	background: transparent;
-	color: #777;
+	color: #000;
 	padding-left: 32px;
 	margin-bottom: -10px;
 	font-size: 1em;
@@ -13400,7 +13400,7 @@ section.timeline .timeline-box .owl-carousel {
 
 .toggle.toggle-minimal .toggle > label {
 	background: transparent;
-	color: #777;
+	color: #000;
 	border-left: 0;
 	border-bottom: 1px solid #CCCC;
 	border-radius: 0;
@@ -13449,7 +13449,7 @@ small, .small {
 
 /* Paragraphs */
 p {
-	color: #777;
+	color: #000;
 	line-height: 26px;
 	margin: 0 0 20px;
 }
@@ -15145,7 +15145,7 @@ ul.team-list .team-item .thumb-info-social-icons {
 }
 
 .http-error h4 {
-	color: #777;
+	color: #000;
 }
 
 .http-error p {
