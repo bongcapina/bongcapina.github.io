@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bong Capiña — Senior Product Designer</title>
+<meta name="description" content="Senior UX/Product Designer specializing in SaaS platforms, enterprise dashboards, and healthcare systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #060608;
+  --fg: #f0ede8;
+  --muted: #5a5a6a;
+  --accent: #c8b8ff;
+  --accent2: #80f0c8;
+  --accent3: #ff8c6e;
+  --glass-bg: rgba(255,255,255,0.03);
+  --glass-border: rgba(255,255,255,0.07);
+  --card-glow: rgba(200,184,255,0.12);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
+body {
+  font-family: 'Public Sans', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* ─── CURSOR ─────────────────────────────────────── */
+#cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(200,184,255,0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width 0.25s, height 0.25s, border-color 0.25s, background 0.25s;
+  mix-blend-mode: exclusion;
+}
+#cursor-dot {
+  position: fixed;
+  width: 5px; height: 5px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%,-50%);
+}
+body:has(.project-card:hover) #cursor-ring {
+  width: 80px; height: 80px;
+  background: rgba(200,184,255,0.06);
+  border-color: var(--accent);
+}
+
+/* ─── PROGRESS BAR ────────────────────────────────── */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+  width: 0%;
+  z-index: 1001;
+  transition: width 0.1s linear;
+}
+
+/* ─── VISION OS BACKGROUND ────────────────────────── */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── NAV ─────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 40px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(6,6,8,0.4);
+  backdrop-filter: blur(24px) saturate(1.5);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-logo {
+  font-size: 14px;
+  font-family: 'Public Sans', sans-serif;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.nav-links { display: flex; gap: 36px; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  font-family: 'Public Sans', sans-serif;
+  transition: color 0.2s;
+  text-transform: lowercase;
+}
+.nav-links a:hover { color: var(--fg); }
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-family: 'Public Sans', sans-serif;
+  color: var(--accent2);
+}
+.status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent2);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* ─── SECTIONS (snap) ────────────────────────────── */
+section {
+  position: relative;
+  z-index: 1;
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 40px;
+  width: 100%;
+}
+
+/* ─── HERO ────────────────────────────────────────── */
+.hero-section {
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.hero-eyebrow {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s ease forwards;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--accent);
+}
+
+.hero-h1 {
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.35s ease forwards;
+}
+
+.hero-h1 .word-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  margin-top: 32px;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 400;
+  max-width: 480px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.5s ease forwards;
+}
+
+.hero-cta {
+  margin-top: 48px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.65s ease forwards;
+}
+
+.btn-primary {
+  padding: 16px 32px;
+  border-radius: 100px;
+  background: var(--fg);
+  color: var(--bg);
+  font-family: 'Public Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(240,237,232,0.15);
+}
+
+.btn-ghost {
+  padding: 16px 32px;
+  border-radius: 100px;
+  border: 1px solid var(--glass-border);
+  color: var(--muted);
+  font-family: 'Public Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.2);
+  color: var(--fg);
+}
+
+.hero-metrics {
+  margin-top: 80px;
+  display: flex;
+  gap: 60px;
+  padding-top: 48px;
+  border-top: 1px solid var(--glass-border);
+  opacity: 0;
+  animation: fadeUp 0.9s 0.8s ease forwards;
+}
+.metric-item {}
+.metric-num {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--fg) 0%, var(--muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.metric-label {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(30px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ─── IMPACT SECTION ─────────────────────────────── */
+.impact-section { padding: 80px 0; }
+
+.section-label {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--muted);
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 2px;
+}
+
+/* ── Base card ── */
+.impact-card {
+  position: relative;
+  padding: 40px 36px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  cursor: none;
+  transition: border-color 0.35s, background 0.35s;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.impact-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), var(--card-glow) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.impact-card:hover::before { opacity: 1; }
+.impact-card:hover { border-color: rgba(200,184,255,0.22); }
+
+.impact-num {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--fg), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.impact-desc {
+  margin-top: 10px;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  line-height: 1.7;
+}
+
+/* ── Variant: wide (spans 2 cols) ── */
+.impact-card.wide { grid-column: span 2; }
+
+/* ── Variant: accent teal ── */
+.impact-card.v-teal { --card-glow: rgba(128,240,200,0.12); }
+.impact-card.v-teal .impact-num {
+  background: linear-gradient(135deg, var(--fg), var(--accent2));
+  -webkit-background-clip: text; background-clip: text;
+}
+.impact-card.v-teal:hover { border-color: rgba(128,240,200,0.22); }
+
+/* ── Variant: accent orange ── */
+.impact-card.v-orange { --card-glow: rgba(255,140,110,0.12); }
+.impact-card.v-orange .impact-num {
+  background: linear-gradient(135deg, var(--fg), var(--accent3));
+  -webkit-background-clip: text; background-clip: text;
+}
+.impact-card.v-orange:hover { border-color: rgba(255,140,110,0.22); }
+
+/* ── Bar chart inside card ── */
+.card-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 56px;
+  margin-bottom: 20px;
+}
+.card-bar {
+  flex: 1;
+  border-radius: 3px 3px 0 0;
+  background: rgba(200,184,255,0.15);
+  transition: background 0.3s;
+}
+.card-bar.active { background: var(--accent); }
+.impact-card.v-teal .card-bar.active { background: var(--accent2); }
+.impact-card.v-orange .card-bar.active { background: var(--accent3); }
+.impact-card:hover .card-bar { background: rgba(200,184,255,0.25); }
+.impact-card.v-teal:hover .card-bar { background: rgba(128,240,200,0.2); }
+.impact-card.v-orange:hover .card-bar { background: rgba(255,140,110,0.2); }
+
+/* ── Ring / donut chart ── */
+.card-ring-wrap {
+  position: absolute;
+  top: 28px; right: 28px;
+  width: 64px; height: 64px;
+}
+.card-ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-bg  { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 5; }
+.ring-fill { fill: none; stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset 1s cubic-bezier(0.16,1,0.3,1); }
+
+/* ── Sparkline ── */
+.card-sparkline {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+.impact-card:hover .card-sparkline { opacity: 0.6; }
+
+/* ── Icon badge ── */
+.card-icon {
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+/* ── Trend tag ── */
+.card-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+.trend-up   { background: rgba(128,240,200,0.1); color: var(--accent2); }
+.trend-down { background: rgba(200,184,255,0.1); color: var(--accent); }
+
+/* ── Horizontal stat row (for wide card) ── */
+.wide-stats {
+  display: flex;
+  gap: 40px;
+  align-items: flex-end;
+}
+.wide-stat {}
+.wide-stat-num {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--fg), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.wide-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.wide-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--glass-border);
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+/* ─── PROJECTS ───────────────────────────────────── */
+.work-section { padding: 80px 0; }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.project-card {
+  position: relative;
+  padding: 40px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), border-color 0.3s;
+  cursor: none;
+  transform-style: preserve-3d;
+}
+
+/* 3D card lighting layer */
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at var(--mx,50%) var(--my,50%), rgba(200,184,255,0.15) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.project-card:hover::before { opacity: 1; }
+.project-card:hover {
+  transform: translateY(-8px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  border-color: rgba(200,184,255,0.25);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,184,255,0.1);
+}
+
+.card-tag {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.card-desc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.card-arrow {
+  position: absolute;
+  bottom: 36px; right: 36px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 16px;
+  transition: border-color 0.2s, color 0.2s, transform 0.3s;
+}
+.project-card:hover .card-arrow {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translate(3px,-3px);
+}
+
+/* ─── CASE STUDIES ───────────────────────────────── */
+.cases-section { padding: 80px 0; }
+
+.case-block {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: start;
+  padding: 60px 0;
+  border-top: 1px solid var(--glass-border);
+  transition: border-color 0.3s;
+}
+.case-block:hover { border-color: rgba(200,184,255,0.2); }
+
+.case-meta {}
+.case-index {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.case-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.case-problem {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.case-content {}
+.case-solution {
+  color: rgba(240,237,232,0.8);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.impact-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.pill {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--glass-border);
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  color: var(--accent2);
+  background: rgba(128,240,200,0.04);
+  letter-spacing: 0.05em;
+}
+
+/* ─── CTA ────────────────────────────────────────── */
+.cta-section {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.cta-eyebrow {
+  font-family: 'Public Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.cta-heading {
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 48px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-heading .grad {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contact-row {
+  margin-top: 60px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 32px;
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+}
+.contact-email { color: var(--fg); }
+.contact-sep { color: var(--muted); }
+.contact-location { color: var(--muted); font-size: 14px; }
+
+/* ─── SCROLL REVEAL ──────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media(max-width:900px) {
+  html { scroll-snap-type: none; }
+  .impact-grid { grid-template-columns: 1fr 1fr; }
+  .impact-card.wide { grid-column: span 2; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .case-block { grid-template-columns: 1fr; gap: 32px; }
+  .hero-metrics { flex-wrap: wrap; gap: 30px; }
+  nav { padding: 0 20px; }
+  .container { padding: 0 20px; }
+  .nav-status { display: none; }
+}
+
+@media(max-width:600px) {
+  .impact-grid { grid-template-columns: 1fr; }
+  .hero-h1 { font-size: 42px; }
+}
+
+/* footer line */
+.footer {
+  position: relative;
+  z-index: 1;
+  padding: 32px 40px;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  scroll-snap-align: none;
+}
+.footer-left { font-family: 'Public Sans', sans-serif; font-size: 14px; color: var(--muted); }
+.footer-right { font-family: 'Public Sans', sans-serif; font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<!-- Progress bar -->
+<div id="progress-bar"></div>
+
+<!-- Vision OS canvas background -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Bong Capiña</div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#cases">Cases</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    Available for roles
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section" id="home">
+  <div class="container">
+    <div class="hero-eyebrow">Senior Product Designer</div>
+    <h1 class="hero-h1">
+      Clarity through<br>
+      <span class="word-accent">Design</span><br>
+    </h1>
+    <p class="hero-sub">
+      Enterprise SaaS platforms, healthcare dashboards, and workflow systems that reduce cognitive load and drive real outcomes.
+    </p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#work">View Work</a>
+      <a class="btn-ghost" href="#contact">Get in Touch</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric-item">
+        <div class="metric-num">15+</div>
+        <div class="metric-label">Years Experience</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">40%</div>
+        <div class="metric-label">Workflow Efficiency</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">12+</div>
+        <div class="metric-label">Products Shipped</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">7→3</div>
+        <div class="metric-label">Steps Reduced</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-section" id="impact">
+  <div class="container">
+    <div class="section-label">Product Impact</div>
+    <div class="impact-grid">
+
+      <!-- 1: Bar chart variant -->
+      <div class="impact-card reveal">
+        <div class="card-bars">
+          <div class="card-bar" style="height:30%"></div>
+          <div class="card-bar" style="height:50%"></div>
+          <div class="card-bar" style="height:65%"></div>
+          <div class="card-bar active" style="height:80%"></div>
+          <div class="card-bar active" style="height:90%"></div>
+          <div class="card-bar active" style="height:100%"></div>
+        </div>
+        <div class="impact-num">15+</div>
+        <div class="impact-desc">Years Designing Enterprise Products</div>
+      </div>
+
+      <!-- 2: Ring donut variant (teal) -->
+      <div class="impact-card v-teal reveal reveal-delay-1">
+        <div class="card-ring-wrap">
+          <svg viewBox="0 0 64 64">
+            <circle class="ring-bg"   cx="32" cy="32" r="28"/>
+            <circle class="ring-fill" cx="32" cy="32" r="28"
+              stroke="rgba(128,240,200,0.7)"
+              stroke-dasharray="175.9"
+              stroke-dashoffset="44"
+              id="ring1"/>
+          </svg>
+        </div>
+        <div class="card-trend trend-up">↑ 40%</div>
+        <div class="impact-num">40%</div>
+        <div class="impact-desc">Workflow Efficiency Improvement</div>
+      </div>
+
+      <!-- 3: Icon variant -->
+      <div class="impact-card reveal reveal-delay-2">
+        <div class="card-icon">🏥</div>
+        <div class="impact-num">12+</div>
+        <div class="impact-desc">Enterprise & Healthcare Products Shipped</div>
+      </div>
+
+      <!-- 4: Steps reduced (orange) -->
+      <div class="impact-card v-orange reveal reveal-delay-3">
+        <div class="card-trend trend-down">↓ 57% steps</div>
+        <div class="impact-num">7→3</div>
+        <div class="impact-desc">Scanner Workflow Steps Reduced</div>
+        <!-- sparkline SVG -->
+        <svg class="card-sparkline" viewBox="0 0 200 60" preserveAspectRatio="none">
+          <polyline points="0,55 30,48 60,40 90,32 120,22 150,14 200,4"
+            fill="none" stroke="rgba(255,140,110,0.7)" stroke-width="2"/>
+          <polygon points="0,60 0,55 30,48 60,40 90,32 120,22 150,14 200,4 200,60"
+            fill="rgba(255,140,110,0.08)"/>
+        </svg>
+      </div>
+
+      <!-- 5: Wide card with multi-stats -->
+      <div class="impact-card wide v-teal reveal">
+        <svg class="card-sparkline" viewBox="0 0 400 60" preserveAspectRatio="none">
+          <polyline points="0,50 50,42 100,38 150,28 200,24 250,18 300,12 350,8 400,4"
+            fill="none" stroke="rgba(128,240,200,0.6)" stroke-width="1.5"/>
+          <polygon points="0,60 0,50 50,42 100,38 150,28 200,24 250,18 300,12 350,8 400,4 400,60"
+            fill="rgba(128,240,200,0.06)"/>
+        </svg>
+        <div class="wide-stats">
+          <div class="wide-stat">
+            <div class="wide-stat-num">15+</div>
+            <div class="wide-stat-label">Years Experience</div>
+          </div>
+          <div class="wide-divider"></div>
+          <div class="wide-stat">
+            <div class="wide-stat-num">12+</div>
+            <div class="wide-stat-label">Products Shipped</div>
+          </div>
+          <div class="wide-divider"></div>
+          <div class="wide-stat">
+            <div class="wide-stat-num">40%</div>
+            <div class="wide-stat-label">Efficiency Gain</div>
+          </div>
+          <div class="wide-divider"></div>
+          <div class="wide-stat">
+            <div class="wide-stat-num">3</div>
+            <div class="wide-stat-label">Industries Served</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6: Ring donut (purple) — document processing -->
+      <div class="impact-card reveal reveal-delay-1">
+        <div class="card-ring-wrap">
+          <svg viewBox="0 0 64 64">
+            <circle class="ring-bg"   cx="32" cy="32" r="28"/>
+            <circle class="ring-fill" cx="32" cy="32" r="28"
+              stroke="rgba(200,184,255,0.7)"
+              stroke-dasharray="175.9"
+              stroke-dashoffset="106"
+              id="ring2"/>
+          </svg>
+        </div>
+        <div class="card-trend trend-up">↑ Faster</div>
+        <div class="impact-num">40%</div>
+        <div class="impact-desc">Document Processing Speed Increase</div>
+      </div>
+
+      <!-- 7: Bar chart (orange) — user adoption -->
+      <div class="impact-card v-orange reveal reveal-delay-2">
+        <div class="card-bars">
+          <div class="card-bar" style="height:40%"></div>
+          <div class="card-bar" style="height:55%"></div>
+          <div class="card-bar active" style="height:70%"></div>
+          <div class="card-bar active" style="height:82%"></div>
+          <div class="card-bar active" style="height:95%"></div>
+        </div>
+        <div class="impact-num">Remote</div>
+        <div class="impact-desc">Available for Global Remote Design Roles</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work-section" id="work">
+  <div class="container">
+    <div class="section-label">Selected Work</div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal reveal-delay-1">
+        <img src="2026/HealthNow.png" alt="Clincove Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+        <div class="card-tag">Healthcare · UX</div>
+        <div class="card-title">Clincove.com</div>
+        <div class="card-desc">A patient-centric platform for booking appointments, managing medical records, and streamlining clinic workflows online.</div>
+        <div class="card-arrow">↗</div>
+      </div>
+      
+      <!--<div class="project-card reveal">
+        <img src="2026/HealthNow.png" alt="EMR Dashboard Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+        <div class="card-tag">Healthcare · UX</div>
+        <div class="card-title">EMR Dashboard</div>
+        <div class="card-desc">Unifying fragmented clinical data — vitals, labs, medications — into a single cohesive interface for clinicians.</div>
+        <a href="#" target="_blank" rel="noopener noreferrer"><div class="card-arrow">↗</div></a>
+      </div>-->
+
+      <div class="project-card reveal reveal-delay-1">
+        <img src="2026/HealthNow.png" alt="EMR Dashboard Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+        <div class="card-tag">Enterprise · Workflow</div>
+        <div class="card-title">Doc Exchange Platform</div>
+        <div class="card-desc">End-to-end document submission, approval, and status tracking for enterprise-scale organizations.</div>
+        <div class="card-arrow">↗</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <img src="2026/HealthNow.png" alt="EMR Dashboard Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+        <div class="card-tag">Hardware · UX</div>
+        <div class="card-title">Scanner Hardware UX</div>
+        <div class="card-desc">Reducing a 7-step scanning workflow to 3 clear stages — capture, preview, confirm. Built for non-technical users.</div>
+        <div class="card-arrow">↗</div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="MockDo Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">SaaS · UX</div>
+  <div class="card-title">MockDo</div>
+  <div class="card-desc">A SaaS platform streamlining workflow management, improving task tracking and team collaboration.</div>
+  <div class="card-arrow">↗</div>
+</div>
+
+<div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="Echoed Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">SaaS · UX</div>
+  <div class="card-title">Echoed</div>
+  <div class="card-desc">Enhancing communication efficiency through a unified messaging and collaboration interface.</div>
+  <div class="card-arrow">↗</div>
+</div>
+
+<div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="PreSelect Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">Dashboard · UX</div>
+  <div class="card-title">PreSelect</div>
+  <div class="card-desc">A data-driven dashboard for managing selections, tracking performance, and visualizing key metrics.</div>
+  <div class="card-arrow">↗</div>
+</div>
+
+<div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="Hawaii Booking App Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">Booking App · UX</div>
+  <div class="card-title">Hawaii</div>
+  <div class="card-desc">A user-friendly booking app designed for seamless reservations and scheduling experiences.</div>
+  <div class="card-arrow">↗</div>
+</div>
+
+<div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="Prymo Website Redesign Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">Website Redesign · UX</div>
+  <div class="card-title">Prymo</div>
+  <div class="card-desc">Redesigning the website to modernize visuals and improve usability for enhanced user engagement.</div>
+  <div class="card-arrow">↗</div>
+</div>
+
+<div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="LRSI Dashboard Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">Dashboard · UX</div>
+  <div class="card-title">LRSI</div>
+  <div class="card-desc">A comprehensive dashboard for tracking operational data and analytics for better decision-making.</div>
+  <div class="card-arrow">↗</div>
+</div>
+
+<div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="Top Legal Dashboard Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">Dashboard · UX</div>
+  <div class="card-title">Top Legal</div>
+  <div class="card-desc">Streamlining legal data management and visual reporting in an intuitive dashboard interface.</div>
+  <div class="card-arrow">↗</div>
+</div>
+
+<div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="Ocelot Booking App Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">Booking App · UX</div>
+  <div class="card-title">Ocelot Booking</div>
+  <div class="card-desc">Simplifying bookings and reservations through a sleek, mobile-first interface.</div>
+  <div class="card-arrow">↗</div>
+</div>
+
+<div class="project-card reveal reveal-delay-1">
+  <img src="2026/HealthNow.png" alt="OCLS EMR Redesign Preview" style="width:100%; height:auto; margin-bottom:30px; display:block; object-fit:cover; border-radius:16px;">
+  <div class="card-tag">EMR Redesign · UX</div>
+  <div class="card-title">OCLS</div>
+  <div class="card-desc">Redesigning the EMR system to unify patient data, enhance clinician workflow, and improve usability.</div>
+  <div class="card-arrow">↗</div>
+</div>
+      
+
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="cases-section" id="cases">
+  <div class="container">
+    <div class="section-label">Case Studies</div>
+
+    <div class="case-block reveal">
+      <div class="case-meta">
+        <div class="case-index">01 / Healthcare</div>
+        <div class="case-title">EMR Dashboard Redesign</div>
+        <div class="case-problem">Doctors struggled navigating fragmented patient data scattered across multiple disconnected screens.</div>
+      </div>
+      <div class="case-content">
+        <div class="case-solution">
+          The redesigned dashboard unified clinical data — vitals, lab results, medications — into a single interface with intelligent hierarchy. Information prioritized by clinical urgency, not alphabetical order.
+        </div>
+        <div class="impact-pills">
+          <span class="pill">↓ Navigation time</span>
+          <span class="pill">↑ Data visibility</span>
+          <span class="pill">Unified interface</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-block reveal reveal-delay-1">
+      <div class="case-meta">
+        <div class="case-index">02 / Enterprise</div>
+        <div class="case-title">Document Exchange Workflow</div>
+        <div class="case-problem">Organizations had zero visibility into where documents were in the approval chain, creating costly delays.</div>
+      </div>
+      <div class="case-content">
+        <div class="case-solution">
+          Introduced document status tracking, version history, and centralized management across approval stages. Every stakeholder could see exact document state in real time.
+        </div>
+        <div class="impact-pills">
+          <span class="pill">↑ 40% processing speed</span>
+          <span class="pill">Version history</span>
+          <span class="pill">Status states</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-block reveal reveal-delay-2">
+      <div class="case-meta">
+        <div class="case-index">03 / Hardware</div>
+        <div class="case-title">Scanner Hardware UX</div>
+        <div class="case-problem">The scanning workflow required excessive interaction steps, causing repeated errors for non-technical users.</div>
+      </div>
+      <div class="case-content">
+        <div class="case-solution">
+          Redesigned the flow as three clear, linear stages: capture → preview → confirm. Each stage gives users full confidence before proceeding, eliminating the need to rescan.
+        </div>
+        <div class="impact-pills">
+          <span class="pill">7 → 3 steps</span>
+          <span class="pill">↓ Rescan rate</span>
+          <span class="pill">Non-technical users</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-eyebrow">Open to opportunities</div>
+    <h2 class="cta-heading">Let's <span class="grad">design solutions</span> that make sense.</h2>
+    <div>
+      <a class="btn-primary" href="#" style="font-size:14px; margin-right:12px;">bongcapina@gmail.com ↗</a>
+      <a class="btn-primary" href="#" style="font-size:14px; margin-right:12px;">Download Resume ↓</a>
+      <a class="btn-primary" href="#" style="font-size:14px;">Figma Folio ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2026 Bong Capiña</div>
+  <div class="footer-right">Senior Product Designer</div>
+</footer>
+
+<script>
+// ─── CURSOR ───────────────────────────────────────────────
+const ring = document.getElementById('cursor-ring');
+const dot  = document.getElementById('cursor-dot');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top  = my + 'px';
+});
+
+(function animCursor() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+
+// ─── VISION OS BACKGROUND ─────────────────────────────────
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Orb config
+const orbs = [
+  { x: 0.15, y: 0.2,  r: 0.55, hue: 260, speed: 0.00012 },
+  { x: 0.75, y: 0.1,  r: 0.5,  hue: 170, speed: 0.00018 },
+  { x: 0.85, y: 0.85, r: 0.45, hue: 20,  speed: 0.00015 },
+  { x: 0.3,  y: 0.75, r: 0.4,  hue: 240, speed: 0.0001  },
+];
+
+let t = 0;
+function drawBg() {
+  t += 1;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  orbs.forEach((orb, i) => {
+    const ox = (orb.x + Math.sin(t * orb.speed + i * 1.7) * 0.12) * canvas.width;
+    const oy = (orb.y + Math.cos(t * orb.speed + i * 2.3) * 0.1) * canvas.height;
+    const r  = orb.r * Math.max(canvas.width, canvas.height);
+
+    const grad = ctx.createRadialGradient(ox, oy, 0, ox, oy, r);
+    grad.addColorStop(0,   `hsla(${orb.hue},70%,55%,0.13)`);
+    grad.addColorStop(0.5, `hsla(${orb.hue},70%,40%,0.05)`);
+    grad.addColorStop(1,   `hsla(${orb.hue},70%,30%,0)`);
+
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  });
+
+  // Grain overlay (subtle noise texture using ImageData)
+  if (t % 3 === 0) {
+    const size = 80;
+    const imageData = ctx.createImageData(size, size);
+    for (let i = 0; i < imageData.data.length; i += 4) {
+      const v = Math.random() * 12;
+      imageData.data[i]   = v;
+      imageData.data[i+1] = v;
+      imageData.data[i+2] = v;
+      imageData.data[i+3] = Math.random() * 20;
+    }
+    ctx.putImageData(imageData, 0, 0);
+  }
+
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+
+// ─── SCROLL PROGRESS ─────────────────────────────────────
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  progressBar.style.width = pct + '%';
+}, { passive: true });
+
+
+// ─── SCROLL REVEAL ────────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+
+// ─── IMPACT CARD SPOTLIGHT ────────────────────────────────
+document.querySelectorAll('.impact-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1);
+    const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
+    card.style.setProperty('--mx', x + '%');
+    card.style.setProperty('--my', y + '%');
+  });
+});
+
+// ─── RING ANIMATION ON REVEAL ─────────────────────────────
+const ringObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      // Animate ring strokes in
+      e.target.querySelectorAll('.ring-fill').forEach(r => {
+        const target = r.getAttribute('stroke-dashoffset');
+        r.style.strokeDashoffset = '175.9';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            r.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.16,1,0.3,1)';
+            r.style.strokeDashoffset = target;
+          });
+        });
+      });
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.impact-card').forEach(c => ringObserver.observe(c));
+
+
+// ─── 3D TILT + SPOTLIGHT (project cards) ─────────────────
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const cx   = rect.left + rect.width  / 2;
+    const cy   = rect.top  + rect.height / 2;
+    const dx   = (e.clientX - cx) / (rect.width  / 2);
+    const dy   = (e.clientY - cy) / (rect.height / 2);
+
+    // 3D tilt
+    card.style.setProperty('--rx', (-dy * 6) + 'deg');
+    card.style.setProperty('--ry', ( dx * 6) + 'deg');
+
+    // Spotlight position
+    const x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1);
+    const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1);
+    card.style.setProperty('--mx', x + '%');
+    card.style.setProperty('--my', y + '%');
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+  });
+});
+
+
+// ─── SECTION SNAP SMOOTH ─────────────────────────────────
+// Enhance snap with keyboard support
+document.addEventListener('keydown', e => {
+  const sections = Array.from(document.querySelectorAll('section'));
+  const current  = sections.findIndex(s => {
+    const r = s.getBoundingClientRect();
+    return r.top >= -100 && r.top <= 100;
+  });
+  if (e.key === 'ArrowDown' && current < sections.length - 1) {
+    sections[current + 1]?.scrollIntoView({ behavior: 'smooth' });
+  }
+  if (e.key === 'ArrowUp' && current > 0) {
+    sections[current - 1]?.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+</script>
+</body>
+</html>
