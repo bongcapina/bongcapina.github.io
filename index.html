@@ -205,7 +205,7 @@ section {
   color: var(--muted);
   font-size: 18px;
   font-weight: 400;
-  max-width: 480px;
+  max-width: 680px;
   line-height: 1.7;
   opacity: 0;
   animation: fadeUp 0.9s 0.5s ease forwards;
@@ -252,33 +252,91 @@ section {
   color: var(--fg);
 }
 
+/* ─── COMMAND CENTER HERO MATRIX ─────────────────── */
 .hero-metrics {
-  margin-top: 80px;
-  display: flex;
-  gap: 60px;
-  padding-top: 48px;
+  position: relative;
+  margin-top: 76px;
+  padding-top: 28px;
   border-top: 1px solid var(--glass-border);
   opacity: 0;
   animation: fadeUp 0.9s 0.8s ease forwards;
 }
-.metric-item {}
-.metric-num {
-  font-size: 38px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, var(--fg) 0%, var(--muted) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.command-head {
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  margin-bottom:18px;
 }
-.metric-label {
-  font-family: 'Public Sans', sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  text-transform: uppercase;
-  margin-top: 4px;
+.command-kicker, .command-status, .command-label {
+  font-size:10px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+}
+.command-kicker, .command-label { color:var(--muted); }
+.command-status { color:var(--accent2); display:flex; align-items:center; gap:9px; letter-spacing:.12em; }
+.command-status::before {
+  content:''; width:7px; height:7px; border-radius:50%; background:var(--accent2);
+  box-shadow:0 0 12px rgba(128,240,200,.8); animation:commandPulse 1.8s ease-in-out infinite;
+}
+.command-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+.command-card, .command-panel {
+  position:relative; min-width:0; overflow:hidden;
+  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  border:1px solid rgba(200,184,255,.12); border-radius:14px;
+}
+.command-card { padding:20px 20px 18px; opacity:0; animation:commandRise .7s ease forwards; }
+.command-card:nth-child(1){animation-delay:.9s}
+.command-card:nth-child(2){animation-delay:1.03s}
+.command-card:nth-child(3){animation-delay:1.16s}
+.command-card:nth-child(4){animation-delay:1.29s}
+.command-card::after { content:none; }
+.command-value {
+  margin-top:12px; font-size:clamp(30px,4vw,42px); line-height:1; font-weight:700;
+  letter-spacing:-.055em; color:var(--fg);
+}
+.command-value .accent { color:var(--accent); }
+.command-value .teal { color:var(--accent2); }
+.command-caption { margin-top:9px; font-size:11px; color:var(--muted); }
+.command-lower { display:grid; grid-template-columns:1.25fr .75fr; gap:10px; margin-top:10px; }
+.command-panel { padding:18px 20px; }
+.command-panel-top { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.command-panel-note { color:var(--accent2); font-size:11px; }
+.command-flow { display:flex; align-items:center; gap:9px; margin-top:17px; }
+.command-flow-wrap { margin-top:17px; }
+.command-flow-wrap .command-flow { margin-top:0; }
+.command-flow-labels { display:flex; justify-content:space-between; gap:8px; margin-top:9px; color:var(--muted); font-size:9px; letter-spacing:.08em; text-transform:uppercase; }
+.command-flow-labels span { flex:1; text-align:center; }
+.command-flow-labels span:first-child { text-align:left; }
+.command-flow-labels span:last-child { text-align:right; }
+.command-lifecycle { margin-top:16px; }
+.lifecycle-track { display:flex; align-items:center; height:14px; }
+.lifecycle-node { width:9px; height:9px; flex:0 0 9px; border:1px solid var(--accent); border-radius:50%; background:var(--bg); position:relative; z-index:1; opacity:0; transform:scale(.6); animation:lifecycleNode .45s ease forwards; }
+.lifecycle-node:first-child { background:var(--accent2); border-color:var(--accent2); box-shadow:0 0 0 0 rgba(128,240,200,0); animation:lifecycleNode .45s ease .1s forwards,lifecyclePulse 2.4s ease-in-out 1s infinite; }
+.lifecycle-node:nth-of-type(3) { animation-delay:.55s; }
+.lifecycle-node:nth-of-type(5) { animation-delay:1s; }
+.lifecycle-line { height:1px; flex:1; background:rgba(200,184,255,.22); transform:scaleX(0); transform-origin:left; animation:lifecycleFill .7s ease forwards; }
+.lifecycle-line:nth-of-type(2) { animation-delay:.3s; }
+.lifecycle-line:nth-of-type(4) { animation-delay:.75s; }
+.lifecycle-labels { display:flex; justify-content:space-between; gap:6px; margin-top:9px; color:var(--muted); font-size:9px; letter-spacing:.07em; text-transform:uppercase; }
+.lifecycle-labels span:nth-child(2) { text-align:center; }
+.lifecycle-labels span:last-child { text-align:right; }
+.command-node {
+  display:grid; place-items:center; width:32px; height:32px; flex:0 0 32px; border-radius:9px;
+  border:1px solid rgba(200,184,255,.22); color:var(--accent); font-size:11px; font-weight:700;
+  background:rgba(200,184,255,.07);
+}
+.command-node.active { color:var(--bg); background:var(--accent2); border-color:var(--accent2); box-shadow:0 0 18px rgba(128,240,200,.16); }
+.command-connector { height:1px; flex:1; min-width:8px; background:linear-gradient(90deg,rgba(200,184,255,.5),rgba(128,240,200,.65)); transform-origin:left; animation:commandLine .8s 1.5s ease both; }
+.command-bars { display:flex; align-items:center; gap:0; height:42px; margin-top:12px; }
+.command-bars span { position:relative; flex:1; height:1px; background:rgba(200,184,255,.28); }
+.command-bars span::after { content:''; position:absolute; width:7px; height:7px; top:50%; left:50%; border:1px solid var(--accent); border-radius:50%; background:var(--bg); transform:translate(-50%,-50%); }
+.command-bars span:last-child::after { border-color:var(--accent2); background:var(--accent2); }
+.command-foot { margin-top:17px; padding-top:13px; border-top:1px solid var(--glass-border); display:flex; justify-content:space-between; gap:12px; color:var(--muted); font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+@keyframes commandRise { from{opacity:0;transform:translateY(15px)} to{opacity:1;transform:translateY(0)} }
+@keyframes commandPulse { 50%{opacity:.35;box-shadow:0 0 3px rgba(128,240,200,.35)} }
+@keyframes commandBar { to{transform:scaleY(1)} }
+@keyframes commandLine { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+@keyframes lifecycleFill { to{transform:scaleX(1)} }
+@keyframes lifecycleNode { to{opacity:1;transform:scale(1)} }
+@keyframes lifecyclePulse { 0%,100%{box-shadow:0 0 0 0 rgba(128,240,200,0)} 50%{box-shadow:0 0 0 5px rgba(128,240,200,.12)} }
+@media (prefers-reduced-motion:reduce) {
+  .hero-metrics,.command-card,.command-status::before,.command-bars span,.command-connector,.lifecycle-node,.lifecycle-line { animation:none!important; opacity:1!important; transform:none!important; }
 }
 
 @keyframes fadeUp {
@@ -689,7 +747,8 @@ section {
   .impact-card.wide { grid-column: span 2; }
   .projects-grid { grid-template-columns: 1fr; }
   .case-block { grid-template-columns: 1fr; gap: 32px; }
-  .hero-metrics { flex-wrap: wrap; gap: 30px; }
+  .command-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .command-lower { grid-template-columns: 1fr; }
   nav { padding: 0 20px; }
   .container { padding: 0 20px; }
   .nav-status { display: none; }
@@ -698,6 +757,11 @@ section {
 @media(max-width:600px) {
   .impact-grid { grid-template-columns: 1fr; }
   .hero-h1 { font-size: 42px; }
+  .hero-metrics { margin-top: 54px; }
+  .command-card { padding:16px 14px; }
+  .command-panel { padding:16px 14px; }
+  .command-value { font-size:34px; }
+  .command-foot { font-size:9px; }
 }
 
 /* footer line */
@@ -748,34 +812,74 @@ section {
   <div class="container">
     <div class="hero-eyebrow">Product Designer</div>
     <h1 class="hero-h1">
-      Clarity through<br>
-      <span class="word-accent">Design</span><br>
+      Complex products.<br>
+      <span class="word-accent">Clear experiences.</span><br>
     </h1>
     <p class="hero-sub">
-      Product Designer with 5+ years of remote experience delivering SaaS and healthcare products. Focused on simplifying complex workflows, building scalable systems, and collaborating with distributed teams.
+      I turn complex problems into products people understand.<br />
+      Product Designer with 5+ years of remote experience building SaaS, healthcare platforms, MVPs, and digital products. I simplify workflows and turn ideas into intuitive, scalable experiences.
+      <!--Product Designer with 5+ years of remote experience delivering SaaS and healthcare products. Focused on simplifying complex workflows, building scalable systems, and collaborating with distributed teams.-->
       <!--Enterprise SaaS platforms, healthcare dashboards, and workflow systems that reduce cognitive load and drive real outcomes.-->
     </p>
     <div class="hero-cta">
       <a class="btn-primary" href="#work">View Work</a>
       <a class="btn-ghost" href="#contact">Get in Touch</a>
     </div>
-    <div class="hero-metrics">
-      <div class="metric-item">
-        <div class="metric-num">5+</div>
-        <div class="metric-label">Years Experience</div>
+    <div class="hero-metrics" aria-label="Product design impact dashboard">
+      <div class="command-head">
+        <div class="command-kicker">Design intelligence / 2026</div>
+        <div class="command-status">System active</div>
       </div>
-      <div class="metric-item">
-        <div class="metric-num">40%</div>
-        <div class="metric-label">Workflow Efficiency</div>
+      <div class="command-grid">
+        <div class="command-card">
+          <div class="command-label">Experience</div>
+          <div class="command-value">5<span class="accent">+</span></div>
+          <div class="command-caption">Years remote</div>
+        </div>
+        <div class="command-card">
+          <div class="command-label">Products</div>
+          <div class="command-value">12<span class="accent">+</span></div>
+          <div class="command-caption">Products shipped</div>
+        </div>
+        <div class="command-card">
+          <div class="command-label">Efficiency</div>
+          <div class="command-value teal">40%</div>
+          <div class="command-caption">Workflow gains</div>
+        </div>
+        <div class="command-card">
+          <div class="command-label">Simplified</div>
+          <div class="command-value">7<span class="accent">→</span>3</div>
+          <div class="command-caption">Steps reduced</div>
+        </div>
       </div>
-      <div class="metric-item">
-        <div class="metric-num">12+</div>
-        <div class="metric-label">Products Shipped</div>
+      <div class="command-lower">
+        <div class="command-panel">
+          <div class="command-panel-top">
+            <div class="command-label">From complexity to clarity</div>
+            <div class="command-panel-note">Workflow design</div>
+          </div>
+          <div class="command-flow-wrap">
+            <div class="command-flow" aria-hidden="true">
+              <span class="command-node">01</span><span class="command-connector"></span>
+              <span class="command-node">02</span><span class="command-connector"></span>
+              <span class="command-node active">03</span>
+            </div>
+            <div class="command-flow-labels" aria-hidden="true"><span>Discover</span><span>Simplify</span><span>Deliver</span></div>
+          </div>
+        </div>
+        <div class="command-panel">
+          <div class="command-label">Product lifecycle</div>
+          <div class="command-lifecycle" aria-hidden="true">
+            <div class="lifecycle-track">
+              <i class="lifecycle-node"></i><i class="lifecycle-line"></i>
+              <i class="lifecycle-node"></i><i class="lifecycle-line"></i>
+              <i class="lifecycle-node"></i>
+            </div>
+            <div class="lifecycle-labels"><span>Discover</span><span>Design</span><span>Deliver</span></div>
+          </div>
+        </div>
       </div>
-      <div class="metric-item">
-        <div class="metric-num">7→3</div>
-        <div class="metric-label">Steps Reduced</div>
-      </div>
+      <div class="command-foot"><span>Product design / UX / UI</span><span>Scroll to explore ↘</span></div>
     </div>
   </div>
 </section>
